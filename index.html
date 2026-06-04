@@ -37,10 +37,10 @@
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     --font-num: 'Space Grotesk', 'Inter', sans-serif;
     /* Card / stat palette */
-    --c-rose: #cb4a7e;
-    --c-teal: #0f9b90;
-    --c-indigo: #6a5cd6;
-    --c-coral: #e0674a;
+    --c-navy: #0a3d6e;
+    --c-yellow: #ffc21f;
+    --c-red: #d8443a;
+    --c-purple: #6a5cd6;
     --shadow-sm: 0 1px 2px rgba(16, 62, 105, 0.06), 0 2px 6px rgba(16, 62, 105, 0.05);
     --shadow: 0 2px 6px rgba(16, 62, 105, 0.06), 0 10px 28px rgba(16, 62, 105, 0.08);
     --shadow-lg: 0 6px 16px rgba(16, 62, 105, 0.10), 0 22px 50px rgba(16, 62, 105, 0.16);
@@ -280,10 +280,12 @@
     box-shadow: var(--shadow);
     color: #fff;
   }
-  .card-row .card:nth-child(4n+1) { background: var(--c-rose); }
-  .card-row .card:nth-child(4n+2) { background: var(--c-teal); }
-  .card-row .card:nth-child(4n+3) { background: var(--c-indigo); }
-  .card-row .card:nth-child(4n+4) { background: var(--c-coral); }
+  .card-row .card:nth-child(4n+1) { background: var(--c-navy); }
+  .card-row .card:nth-child(4n+2) { background: var(--c-yellow); color: var(--accent-ink); }
+  .card-row .card:nth-child(4n+3) { background: var(--c-red); }
+  .card-row .card:nth-child(4n+4) { background: var(--c-purple); }
+  .card-row .card:nth-child(4n+2) h3 { color: var(--accent-ink); }
+  .card-row .card:nth-child(4n+2) p { color: rgba(74, 53, 0, 0.85); }
   .card h3 { font-size: 1.16rem; margin: 0 0 12px; color: #fff; }
   .card p { margin: 0; color: rgba(255, 255, 255, 0.92); font-size: 0.96rem; }
 
@@ -334,9 +336,11 @@
     box-shadow: var(--shadow);
     color: #fff;
   }
-  .stat-row .stat:nth-child(3n+1) { background: var(--c-rose); }
-  .stat-row .stat:nth-child(3n+2) { background: var(--c-teal); }
-  .stat-row .stat:nth-child(3n+3) { background: var(--c-indigo); }
+  .stat-row .stat:nth-child(3n+1) { background: var(--c-navy); }
+  .stat-row .stat:nth-child(3n+2) { background: var(--c-yellow); color: var(--accent-ink); }
+  .stat-row .stat:nth-child(3n+3) { background: var(--c-red); }
+  .stat-row .stat:nth-child(3n+2) .num { color: var(--accent-ink); }
+  .stat-row .stat:nth-child(3n+2) .label { color: rgba(74, 53, 0, 0.8); }
   .stat .num { font-family: var(--font-num); font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em; color: #fff; display: block; }
   .stat .label { color: rgba(255, 255, 255, 0.88); font-size: 0.95rem; margin-top: 8px; }
 
@@ -381,9 +385,11 @@
     align-items: center;
     gap: 16px;
   }
-  .acc-trigger:hover { background: var(--bg-alt); }
+  .acc-trigger:hover { background: #eaf1f8; color: var(--brand); }
   .acc-trigger .sign { color: var(--brand); font-size: 1.3rem; flex-shrink: 0; transition: transform 0.2s; }
-  .acc-trigger[aria-expanded="true"] .sign { transform: rotate(45deg); }
+  .acc-trigger[aria-expanded="true"] { background: var(--brand); color: #fff; }
+  .acc-trigger[aria-expanded="true"]:hover { background: var(--brand); color: #fff; }
+  .acc-trigger[aria-expanded="true"] .sign { transform: rotate(45deg); color: #fff; }
   .acc-panel { display: none; padding: 16px 22px 24px; color: var(--ink-soft); font-size: 0.97rem; line-height: 1.65; }
   .acc-panel.open { display: block; animation: accIn 0.3s var(--ease); }
   @keyframes accIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
@@ -445,8 +451,9 @@
     transition: background 0.15s var(--ease), border-color 0.15s var(--ease), color 0.15s var(--ease);
   }
   .exp-item:last-child { border-bottom: none; }
-  .exp-item:hover { background: #fff; color: var(--brand); }
-  .exp-item.is-active { background: #fff; border-left-color: var(--brand); color: var(--brand); }
+  .exp-item:hover { background: #eaf1f8; color: var(--brand); }
+  .exp-item.is-active { background: var(--brand); border-left-color: var(--accent); color: #fff; }
+  .exp-item.is-active:hover { background: var(--brand); color: #fff; }
   .explorer-detail { padding: 30px 32px; min-height: 340px; }
   .exp-panel { display: none; }
   .exp-panel.is-active { display: block; animation: accIn 0.3s var(--ease); }
@@ -767,38 +774,24 @@
       <div class="building-photo">Photo: Bellevue Avenue Branch exterior</div>
       <h3>Bellevue Avenue Branch, 185 Bellevue Avenue</h3>
       <p>The Bellevue Branch is a historic 1914 Carnegie library. The project adds 5,600 SF to the building, more than doubling its size, while restoring the historic structure and making it fully accessible for the first time.</p>
-      <div class="acc-controls">
-        <button type="button" class="acc-btn" data-acc-action="open">Open all</button>
-        <button type="button" class="acc-btn" data-acc-action="close">Close all</button>
-      </div>
-      <div class="accordion" data-accordion>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>New ADA-Compliant Entrance and Elevator</span><span class="sign">+</span></button>
-          <div class="acc-panel">For the first time, the branch will be fully accessible. A new ground-level main entrance on the Norwood side, the only location that makes ADA access feasible, connects directly to a new elevator serving every level of the building. The entrance vestibule and lobby double as a flexible welcome space, with room for the Friends' book sale, community information, and stroller parking.</div>
+      <div class="explorer" data-explorer>
+        <div class="explorer-list" role="tablist" aria-label="Bellevue Branch spaces">
+          <button type="button" class="exp-item is-active" data-i="0">New ADA-Compliant Entrance and Elevator</button>
+          <button type="button" class="exp-item" data-i="1">Multipurpose Community Room</button>
+          <button type="button" class="exp-item" data-i="2">Teen Room</button>
+          <button type="button" class="exp-item" data-i="3">Children's Room</button>
+          <button type="button" class="exp-item" data-i="4">Classrooms</button>
+          <button type="button" class="exp-item" data-i="5">Redesigned Front Plaza</button>
+          <button type="button" class="exp-item" data-i="6">Historic Preservation</button>
         </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Multipurpose Community Room</span><span class="sign">+</span></button>
-          <div class="acc-panel">The branch's primary indoor cultural venue, designed for author talks, small performances, art workshops, classes, film screenings, community meetings, and neighborhood programs. Its flexible layout shifts seamlessly between uses, from readings and artist talks to hands-on workshops and community forums, accommodating a wide range of setups and group sizes throughout the year. Projection and smartboard capability support presentations, screenings, and instruction, making this the heart of accessible, high-quality programming at Bellevue.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Teen Room</span><span class="sign">+</span></button>
-          <div class="acc-panel">A dedicated space for teen reading, study, digital activities, and creative hangout time, with flexible seating, work tables, and access to teen collections. It supports everyday after-school needs, homework, and social connection alongside youth-centered programs such as writing groups, art and digital media sessions, book clubs, and cultural discussions that help teens build confidence, skills, and community. Positioned to serve nearby middle and high school students, the room is set apart by a glass wall and door that give teens a space of their own while keeping it open and welcoming.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Children's Room</span><span class="sign">+</span></button>
-          <div class="acc-panel">A purpose-built space for early literacy support, family reading, children's play, and cultural programming for young families, with picture books, early readers, child-sized shelving, and developmentally appropriate seating. It serves as the hub for read-alouds, music and movement, simple art projects, and cultural celebrations that give children consistent exposure to books, language, and creative expression. The redesign responds to steadily growing attendance and adds a sink to support art, crafts, and hands-on activities.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Classrooms</span><span class="sign">+</span></button>
-          <div class="acc-panel">Enclosed classroom space for tutoring, small-group instruction, arts workshops, language learning, homework help, book discussions, and partner-led programs. The space is envisioned to support intimate, hands-on sessions that need a quiet, focused setting, as well as parallel programming so the branch can host more activities at once. Classrooms would be equipped with smartboards, with room that can be set up as a creative studio for art and media projects.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Redesigned Front Plaza</span><span class="sign">+</span></button>
-          <div class="acc-panel">The branch's primary exterior program area, rebuilt to accommodate performances, author readings, neighborhood festivals, small concerts, cultural demonstrations, and civic events, with flexible space for both scheduled programs and informal community use. It lets the library host larger audiences than indoor rooms can hold and serves residents who prefer open-air settings. As the rear green space is reduced, this front courtyard becomes the branch's main outdoor gathering place, anchoring cultural life at the entrance to the building.</div>
-        </div>
-        <div class="acc-item">
-          <button class="acc-trigger" aria-expanded="false"><span>Historic Preservation</span><span class="sign">+</span></button>
-          <div class="acc-panel">The original facade and windows of the 1914 Carnegie building will be restored to preservation standards, and the addition is designed in harmony with the historic architecture, using complementary materials and massing that distinguish new from old without undermining the integrity of the original building. Inside, signature historic features are preserved, including the classic Carnegie circulation desk and the historic character of the main reading spaces, so the branch's heritage remains part of the everyday experience.</div>
+        <div class="explorer-detail">
+          <div class="exp-panel is-active" data-i="0"><h4>New ADA-Compliant Entrance and Elevator</h4><p>For the first time, the branch will be fully accessible. A new ground-level main entrance on the Norwood side, the only location that makes ADA access feasible, connects directly to a new elevator serving every level of the building. The entrance vestibule and lobby double as a flexible welcome space, with room for the Friends' book sale, community information, and stroller parking.</p></div>
+          <div class="exp-panel" data-i="1"><h4>Multipurpose Community Room</h4><p>The branch's primary indoor cultural venue, designed for author talks, small performances, art workshops, classes, film screenings, community meetings, and neighborhood programs. Its flexible layout shifts seamlessly between uses, from readings and artist talks to hands-on workshops and community forums, accommodating a wide range of setups and group sizes throughout the year. Projection and smartboard capability support presentations, screenings, and instruction, making this the heart of accessible, high-quality programming at Bellevue.</p></div>
+          <div class="exp-panel" data-i="2"><h4>Teen Room</h4><p>A dedicated space for teen reading, study, digital activities, and creative hangout time, with flexible seating, work tables, and access to teen collections. It supports everyday after-school needs, homework, and social connection alongside youth-centered programs such as writing groups, art and digital media sessions, book clubs, and cultural discussions that help teens build confidence, skills, and community. Positioned to serve nearby middle and high school students, the room is set apart by a glass wall and door that give teens a space of their own while keeping it open and welcoming.</p></div>
+          <div class="exp-panel" data-i="3"><h4>Children's Room</h4><p>A purpose-built space for early literacy support, family reading, children's play, and cultural programming for young families, with picture books, early readers, child-sized shelving, and developmentally appropriate seating. It serves as the hub for read-alouds, music and movement, simple art projects, and cultural celebrations that give children consistent exposure to books, language, and creative expression. The redesign responds to steadily growing attendance and adds a sink to support art, crafts, and hands-on activities.</p></div>
+          <div class="exp-panel" data-i="4"><h4>Classrooms</h4><p>Enclosed classroom space for tutoring, small-group instruction, arts workshops, language learning, homework help, book discussions, and partner-led programs. The space is envisioned to support intimate, hands-on sessions that need a quiet, focused setting, as well as parallel programming so the branch can host more activities at once. Classrooms would be equipped with smartboards, with room that can be set up as a creative studio for art and media projects.</p></div>
+          <div class="exp-panel" data-i="5"><h4>Redesigned Front Plaza</h4><p>The branch's primary exterior program area, rebuilt to accommodate performances, author readings, neighborhood festivals, small concerts, cultural demonstrations, and civic events, with flexible space for both scheduled programs and informal community use. It lets the library host larger audiences than indoor rooms can hold and serves residents who prefer open-air settings. As the rear green space is reduced, this front courtyard becomes the branch's main outdoor gathering place, anchoring cultural life at the entrance to the building.</p></div>
+          <div class="exp-panel" data-i="6"><h4>Historic Preservation</h4><p>The original facade and windows of the 1914 Carnegie building will be restored to preservation standards, and the addition is designed in harmony with the historic architecture, using complementary materials and massing that distinguish new from old without undermining the integrity of the original building. Inside, signature historic features are preserved, including the classic Carnegie circulation desk and the historic character of the main reading spaces, so the branch's heritage remains part of the everyday experience.</p></div>
         </div>
       </div>
     </div>
