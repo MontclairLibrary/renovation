@@ -1085,7 +1085,7 @@ JotForm.paymentExtrasOnTheFly([null,null,null,{"description":"","name":"name","q
 </script>
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/stylebuilder/static/form-common.css?v=96b8165"/>
 <link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=4.1.67954"/>
-<form class="jotform-form" onsubmit="return typeof testSubmitFunction !== 'undefined' && testSubmitFunction();" action="https://submit.jotform.com/submit/261603839636060" method="post" name="form_261603839636060" id="261603839636060" accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="261603839636060" /><input type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1781096124132" /><input type="hidden" id="submitSource" name="submitSource" value="unknown" /><input type="hidden" id="submitDate" name="submitDate" value="undefined" /><input type="hidden" id="buildDate" name="buildDate" value="1781096124132" /><input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" /><input type="hidden" name="eventObserver" value="1" />
+<form class="jotform-form" onsubmit="return typeof testSubmitFunction !== 'undefined' && testSubmitFunction();" action="https://submit.jotform.com/submit/261603839636060" target="jf_sink" method="post" name="form_261603839636060" id="261603839636060" accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="261603839636060" /><input type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1781096124132" /><input type="hidden" id="submitSource" name="submitSource" value="unknown" /><input type="hidden" id="submitDate" name="submitDate" value="undefined" /><input type="hidden" id="buildDate" name="buildDate" value="1781096124132" /><input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" /><input type="hidden" name="eventObserver" value="1" />
   <div role="main" class="form-all">
     <ul class="form-section page-section" role="presentation">
       <li class="form-line jf-required" data-type="control_fullname" id="id_3"><label class="form-label form-label-top form-label-auto" id="label_3" for="first_3"> Name<span class="form-required" aria-hidden="true">*</span> </label>
@@ -1118,6 +1118,8 @@ JotForm.paymentExtrasOnTheFly([null,null,null,{"description":"","name":"name","q
     }
   </script>
 </form>
+<iframe name="jf_sink" id="jfSink" title="signup submission" style="display:none;border:0;width:0;height:0;"></iframe>
+<p id="jfThanks" style="display:none;margin-top:16px;padding:14px 16px;background:rgba(0,48,96,0.06);border-radius:var(--radius);color:var(--ink);font-weight:500;">Thanks for signing up! You'll receive project updates by email.</p>
         </div>
       </div>
     </div>
@@ -1227,6 +1229,24 @@ JotForm.paymentExtrasOnTheFly([null,null,null,{"description":"","name":"name","q
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+<script>
+  // Stay Informed (JotForm): submit into hidden frame, then show in-place thank-you
+  (function () {
+    var form = document.querySelector('.jf-source form.jotform-form');
+    if (!form) return;
+    var sink = document.getElementById('jfSink');
+    var thanks = document.getElementById('jfThanks');
+    var submitted = false;
+    form.addEventListener('submit', function () { submitted = true; });
+    sink.addEventListener('load', function () {
+      if (submitted) {
+        form.style.display = 'none';
+        thanks.style.display = 'block';
+        if (thanks.scrollIntoView) thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
   })();
 </script>
 </body>
