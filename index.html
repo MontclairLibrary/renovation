@@ -543,9 +543,10 @@
   .field-row input:focus { outline: 2px solid var(--brand); border-color: var(--brand); }
   /* JotForm Source-Code form: restyle to match site */
   .jf-source { margin-top: 8px; }
-  .jf-source .form-all { font-family: var(--font-sans) !important; background: transparent !important; max-width: none !important; width: 100% !important; color: var(--ink); font-size: 1rem; box-shadow: none !important; border: none !important; }
+  .jf-source .form-all { font-family: var(--font-sans) !important; background: transparent !important; max-width: none !important; width: 100% !important; color: var(--ink); font-size: 1rem; box-shadow: none !important; border: none !important; margin: 0 !important; }
   .jf-source ul.form-section { padding: 0 !important; margin: 0 !important; border: none !important; width: 100% !important; box-shadow: none !important; background: transparent !important; }
   .jf-source .form-line { margin: 0 0 12px !important; padding: 0 !important; background: transparent !important; }
+  .jf-source .form-line:last-child { margin-bottom: 0 !important; }
   .jf-source .form-label { color: var(--ink) !important; font-weight: 600 !important; font-size: 0.9rem !important; margin: 0 0 4px !important; font-family: var(--font-sans) !important; }
   .jf-source .form-sub-label { color: var(--ink-soft) !important; font-size: 0.78rem !important; }
   .jf-source .form-required { color: var(--c-red) !important; }
@@ -565,7 +566,7 @@
     height: auto !important;
   }
   .jf-source .form-textbox:focus { outline: 2px solid var(--brand) !important; border-color: var(--brand) !important; }
-  .jf-source .form-buttons-wrapper { margin: 0 !important; }
+  .jf-source .form-buttons-wrapper { margin: 0 !important; padding: 6px 0 0 !important; }
   .jf-source .form-submit-button {
     background: var(--brand) !important;
     color: #fff !important;
