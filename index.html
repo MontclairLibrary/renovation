@@ -516,7 +516,8 @@
   .timeline-note { text-align: center; margin-top: 28px; color: var(--ink-soft); }
 
   /* ---------- Signup ---------- */
-  .signup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .signup-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; align-items: start; }
+  .signup-card--wide { grid-column: span 2; }
   .signup-card {
     background: #fff;
     border: 1px solid var(--line);
@@ -527,6 +528,10 @@
   .signup-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.45rem; margin: 0 0 14px; }
   .signup-card p { color: var(--ink-soft); }
   .signup-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+  .signup-actions--surveys { flex-direction: row; flex-wrap: wrap; }
+  .signup-actions--surveys .btn { flex: 1 1 220px; text-align: center; }
+  .signup-card .signup-actions .btn { padding: 9px 18px; font-size: 0.88rem; }
+  .signup-or { font-size: 0.92rem; color: var(--ink-soft); margin: 20px 0 0; }
   .field-row { display: flex; gap: 10px; margin-top: 16px; }
   .field-row input {
     flex: 1;
@@ -635,6 +640,9 @@
 
     .card-row { grid-template-columns: 1fr 1fr; }
     .two-col, .signup-grid { grid-template-columns: 1fr; }
+    .signup-card--wide { grid-column: auto; }
+    .signup-actions--surveys { flex-direction: column; }
+    .signup-actions--surveys .btn { flex: 0 0 auto; }
     .stat-row { grid-template-columns: 1fr; }
     .timeline { grid-template-columns: 1fr; }
     .footer-cols { grid-template-columns: 1fr; }
@@ -668,10 +676,7 @@
   .voices .q::after { content: ""; position: absolute; left: 16px; bottom: -6px; width: 12px; height: 12px; background: inherit; border-radius: 0 0 3px 0; transform: rotate(45deg); }
   .voices .q .inner { animation: voices-float var(--fdur, 8s) ease-in-out infinite; animation-delay: var(--fdelay, 0s); }
   .voices .q p { font-family: var(--font-display); margin: 0; color: var(--tx); font-size: var(--fs); line-height: 1.32; }
-  .voices .q.is-open { outline: none; transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
-  @media (hover: hover) {
-    .voices .q:hover { transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
-  }
+  .voices .q.is-open, .voices .q.is-hover { outline: none; transform: scale(var(--sc)); z-index: 60; background: #fff; box-shadow: 0 7px 18px rgba(10, 30, 60, .18), 0 2px 5px rgba(10, 30, 60, .1); }
   .voices .q:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
   .voices .q.xl { --w: 212px; --fs: 13px;   --sc: 1.7; }
   .voices .q.lg { --w: 172px; --fs: 11.5px; --sc: 1.95; }
@@ -1108,7 +1113,7 @@
   <div class="wrap">
     <div class="section-head section-head--wide">
       <h2 id="voices-title">In their own words</h2>
-      <p>What residents want from their library, verbatim from 568 survey responses. Hover or tap any quote to read it.</p>
+      <p>What residents want from their library, verbatim from survey responses. Hover or tap any quote to read it.</p>
     </div>
     <div class="filters" id="voicesFilters"></div>
     <div class="cloud" id="voicesCloud" role="list" aria-labelledby="voices-title"></div>
@@ -1214,11 +1219,12 @@
     const oy = cy<H*0.30?'top':cy>H*0.70?'bottom':'center';
     el.style.transformOrigin=ox+' '+oy;
   }
-  function closeAll(){ cloud.querySelectorAll('.q.is-open').forEach(o=>o.classList.remove('is-open')); }
+  function closeAll(){ cloud.querySelectorAll('.q.is-open, .q.is-hover').forEach(o=>{o.classList.remove('is-open'); o.classList.remove('is-hover');}); }
   function toggleOpen(d){
     const open=d.classList.contains('is-open');
     closeAll();
     if(!open){ setOrigin(d); d.classList.add('is-open'); }
+    else { d._noHover=true; } // clicked an open bubble: keep it shrunk until the pointer leaves
   }
   function render(list){
     cloud.innerHTML='';
@@ -1233,7 +1239,8 @@
       d.style.setProperty('--fdelay',((i%9)*0.4).toFixed(2)+'s');
       d.style.setProperty('--fin',Math.min(i*0.02,0.5).toFixed(2)+'s');
       d.innerHTML='<div class="inner"><p>“'+q.x+'”</p></div>';
-      d.addEventListener('mouseenter',()=>setOrigin(d));
+      d.addEventListener('mouseenter',()=>{ if(d._noHover) return; setOrigin(d); if(!d.classList.contains('is-open')) d.classList.add('is-hover'); });
+      d.addEventListener('mouseleave',()=>{ d.classList.remove('is-hover'); d._noHover=false; });
       d.addEventListener('focus',()=>setOrigin(d));
       d.addEventListener('click',()=>toggleOpen(d));
       d.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleOpen(d); } });
@@ -1272,12 +1279,16 @@
 <section id="feedback">
   <div class="wrap">
     <div class="signup-grid">
-      <div class="signup-card">
+      <div class="signup-card signup-card--wide">
         <h3>Tell Us What You Think</h3>
-        <p>The renovated libraries will be shaped by the community they serve. Share your thoughts, ideas, and questions using the form below, or take a few minutes to fill out our <a href="https://form.jotform.com/261602877569066">community survey</a>.</p>
+        <p>The renovated libraries will be shaped by the community they serve. Take a few minutes to complete the Space &amp; Collections Survey for your building &mdash; tell us how you use the space and what you&rsquo;d like to see on the shelves.</p>
+        <div class="signup-actions signup-actions--surveys">
+          <a class="btn btn-primary" href="https://form.jotform.com/261671006642149" target="_blank" rel="noopener">Main Library Survey</a>
+          <a class="btn btn-primary" href="https://form.jotform.com/261671302438151" target="_blank" rel="noopener">Bellevue Branch Survey</a>
+        </div>
+        <p class="signup-or">Have a general thought or question?</p>
         <div class="signup-actions">
-          <a class="btn btn-primary" href="https://form.jotform.com/261604782355056" target="_blank" rel="noopener" onclick="window.open(this.href, 'mplFeedbackForm', 'scrollbars=yes,toolbar=no,resizable=yes,width=700,height=600'); return false;">Share your feedback</a>
-          <a class="btn btn-outline" href="https://form.jotform.com/261602877569066">Take the community survey</a>
+          <a class="btn btn-outline" href="https://form.jotform.com/261604782355056" target="_blank" rel="noopener" onclick="window.open(this.href, 'mplFeedbackForm', 'scrollbars=yes,toolbar=no,resizable=yes,width=700,height=600'); return false;">Share general feedback</a>
         </div>
       </div>
       <div class="signup-card">
