@@ -176,7 +176,7 @@
     overflow: hidden;
     background-image:
       linear-gradient(120deg, rgba(0,28,58,0.93) 0%, rgba(0,40,80,0.82) 45%, rgba(0,48,96,0.76) 100%),
-      url('Montclair Library Main Exterior.jpg');
+      url('../Montclair Library Main Exterior.jpg');
     background-size: cover, cover;
     background-position: center, center;
     background-repeat: no-repeat, no-repeat;
