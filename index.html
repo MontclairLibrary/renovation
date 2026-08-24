@@ -688,6 +688,18 @@
   @keyframes voices-fade { to { opacity: 1; } }
   @keyframes voices-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
   @media (prefers-reduced-motion: reduce) { .voices .q .inner { animation: none; } .voices .q { animation: voices-fade .3s ease forwards; } }
+
+  /* ---------- Selecting our architect ---------- */
+  .arch-body { max-width: 840px; margin: 0 auto; }
+  .arch-body p { color: var(--ink-soft); font-size: 1.05rem; line-height: 1.7; margin: 0 0 16px; }
+  .arch-body p:last-child { margin-bottom: 0; }
+  .arch-subhead { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; color: var(--ink); max-width: 840px; margin: 34px auto 16px; }
+  .firm-grid { list-style: none; padding: 0; max-width: 940px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px 28px; }
+  .firm-grid li { position: relative; padding-left: 18px; color: var(--ink); font-size: 0.96rem; line-height: 1.4; }
+  .firm-grid li::before { content: ""; position: absolute; left: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
+  .arch-docs { max-width: 840px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 14px; }
+  @media (max-width: 820px) { .firm-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .firm-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -708,6 +720,7 @@
       <li><a href="#built">What's Being Built</a></li>
       <li><a href="#funding">Funding</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a href="#architect">Architect Search</a></li>
       <li><a href="#next">Next Steps</a></li>
       <li><a href="#feedback">Stay Informed</a></li>
     </ul>
@@ -1078,6 +1091,63 @@
         <button class="acc-trigger" aria-expanded="false"><span>Shouldn't function come before "beautiful" spaces?</span><span class="sign">+</span></button>
         <div class="acc-panel">Function and beauty go hand in hand in public spaces. Well-designed environments support learning, dignity, accessibility, and community use, especially in a space meant to serve everyone. The CAFE program delivers the functional foundation, and philanthropy helps make the result exceptional.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SELECTING OUR ARCHITECT ===== -->
+<section id="architect">
+  <div class="wrap">
+    <div class="section-head section-head--wide">
+      <h2>Selecting Our Architect</h2>
+      <p>Choosing the architect is one of the most important decisions in this project, and that search is now well underway.</p>
+    </div>
+
+    <div class="arch-body">
+      <p>This spring, the Library convened a dedicated Architect Selection Committee, which has met nearly every week since June to shape the search and guide the decision. In July, the Library released a formal Request for Proposals (RFP #26-01) for architectural services covering both buildings, and it went live on July 15. We are seeking a single firm, with its full consultant team, to design the Main Library and the Bellevue Avenue Branch at the same time. The two buildings ask for different things. The Main Library, a 1955 mid-century modern building by Ralph Walker, calls for an ambitious, innovative renovation that builds on its distinctive character. The Bellevue Avenue Branch, a 1914 Carnegie library on the National Register of Historic Places, is a preservation project that will make the building fully accessible for the first time while honoring its historic character. The selected firm will lead the work from concept design through construction, and the project must achieve LEED Silver certification.</p>
+      <p>On July 29, we hosted a site tour and architectural briefing at the Main Library for interested firms. About 40 people attended, representing design teams from across the region and beyond.</p>
+      <p>Formal submissions were due on August 19. We received 21 proposals, a strong and competitive response.</p>
+    </div>
+
+    <h3 class="arch-subhead">Firms that submitted proposals</h3>
+    <ul class="firm-grid">
+      <li>AOS Architects</li>
+      <li>Arcari Iovino Architects PC</li>
+      <li>Clarke Caton Hintz</li>
+      <li>Dattner Architects</li>
+      <li>DiCara Rubino Architects</li>
+      <li>DIGroup Architecture MDBE</li>
+      <li>DMR Architects</li>
+      <li>DRG Architects AIA Inc</li>
+      <li>H2M Architects Engineers</li>
+      <li>HBM Architects</li>
+      <li>HKS Inc</li>
+      <li>James Guerra Architects PA</li>
+      <li>Lothrop Associates Architects DPC</li>
+      <li>Marble Fairbanks</li>
+      <li>Paulus, Sokolowski and Sartor</li>
+      <li>Sage and Coombe Architects</li>
+      <li>Settembrino Architects</li>
+      <li>SSP Architects</li>
+      <li>Studio 1200</li>
+      <li>Studio Hillier</li>
+      <li>The Musial Group PA</li>
+    </ul>
+
+    <h3 class="arch-subhead">How the decision will be made</h3>
+    <div class="arch-body">
+      <p>The Architect Selection Committee brings together a broad cross-section of the people invested in this project: a few Library staff members, members of the Library Foundation's board, Library Trustees, Township officials, and members of Montclair's Historic Preservation Commission, along with the Library's Executive Director and the Foundation's Executive Director. Several members are practicing architects, which brings professional design expertise directly into the review.</p>
+      <p>The committee is now reviewing every submission against the criteria published in the RFP. Those criteria weigh relevant library, historic preservation, and large-project experience most heavily, along with the proposed team, sustainability credentials, and cost.</p>
+      <p>From these 21 firms, the committee will shortlist a small group, currently expected to be four or five, to present in person in late September. The committee will then bring a recommendation to the Board of Trustees, with the goal of selecting the architect in October. Once a firm is chosen, design work can begin.</p>
+    </div>
+
+    <h3 class="arch-subhead">Read the documents</h3>
+    <div class="arch-body">
+      <p>We believe in doing this out in the open. You are welcome to review the full materials:</p>
+    </div>
+    <div class="arch-docs">
+      <a class="btn btn-outline" href="MPL-RFP-26-01-Architectural-Services.pdf" target="_blank" rel="noopener">Download the full RFP (PDF)</a>
+      <a class="btn btn-outline" href="MPL-Site-Tour-Architectural-Briefing.pdf" target="_blank" rel="noopener">Download the July 29 presentation (PDF, ~30 MB)</a>
     </div>
   </div>
 </section>
