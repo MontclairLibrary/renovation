@@ -709,3 +709,9 @@
 .article-foot { max-width: 840px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid var(--line); }
 .article-foot a { color: var(--brand); font-weight: 600; text-decoration: none; }
 .article-foot a:hover { text-decoration: underline; }
+
+/* ---------- Word cloud figure (blog post) ---------- */
+.wc-figure { max-width: 960px; margin: 0 auto; }
+.wc-figure img { width: 100%; height: auto; display: block; border-radius: var(--radius); box-shadow: var(--shadow); }
+.wc-figure figcaption { margin-top: 12px; text-align: center; color: var(--ink-soft); font-size: 0.9rem; line-height: 1.5; }
+.wc-actions { max-width: 960px; margin: 18px auto 0; display: flex; justify-content: center; }
